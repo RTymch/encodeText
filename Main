@@ -1,0 +1,69 @@
+package com.company;
+
+/* Program encode text by shifting chars up to 36 symbols
+Working directory has two files: inputCode.txt for input text and outputCode.txt for output. Because if there is only one file this causes that file was  cleared.
+ */
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Scanner inputText = new Scanner(System.in);
+        FileWriter fw = new FileWriter("outputCode.txt", false);
+        FileReader fr = new FileReader("inputCode.txt");
+        System.out.println("Select option:\n1. Input the text manually to encode \n2. Input the text manually to decode\n3. Encode text file\n4. Decode text file");
+        String sw = inputText.next();
+        switch (sw) {
+            case "1":
+                System.out.println("Enter text to encode:");
+                String manualInputEncode = inputText.next();
+                char[] strToArray = manualInputEncode.toCharArray();
+                for (char c1 : strToArray) {
+                    int codedAscii = (int) c1 + 36;
+
+                    char b = (char) codedAscii;
+                    System.out.print(b);
+                    fw.append(b);
+                    fw.flush();
+                }
+                break;
+            case "2":
+                System.out.println("Enter text to decode:");
+                String manualInputDecode = inputText.next();
+                char[] strToArray2 = manualInputDecode.toCharArray();
+                for (char c1 : strToArray2) {
+                    int codedAscii = (int) c1 - 36;
+
+                    char b2 = (char) codedAscii;
+                    System.out.print(b2);
+                    fw.append(b2);
+                    fw.flush();
+                }
+                break;
+            case "3":
+                int c;
+                while ((c = fr.read()) != -1) {
+                    int encoded = c + 36;
+                    System.out.print((char) encoded);
+                    fw.append((char) encoded);
+                    fw.flush();
+                }
+                break;
+            case "4":
+                int d;
+                while ((d = fr.read()) != -1) {
+                    int decoded = d - 36;
+                    System.out.print((char) decoded);
+                    fw.append((char) decoded);
+                    fw.flush();
+                }
+                break;
+
+        }
+
+
+    }
+}
